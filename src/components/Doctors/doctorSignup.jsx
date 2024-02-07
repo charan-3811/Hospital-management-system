@@ -12,7 +12,7 @@ function DoctorSignup() {
 
     async function handleSignup() {
         try {
-            const response = await axios.post("http://localhost:4000/patientSignup", {
+            const response = await axios.post("http://localhost:4000/doctorSignup", {
                 name: name1,
                 username: username1,
                 password: password1,
@@ -25,7 +25,7 @@ function DoctorSignup() {
                 alert(ans);
             } else if (ans === "Added successfully") {
                 alert(ans);
-                navigate('/patientLogin');
+                navigate('/doctorLogin');
             } else {
                 alert(ans);
             }

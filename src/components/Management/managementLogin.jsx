@@ -2,14 +2,15 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const ManagementLogin = () => {
+const ManagementLogin = (props) => {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
+    const {user,setuser}=props
 
     const handleLogin = async (e) => {
-        e.preventDefault(); // Prevent default form submission behavior
+        e.preventDefault();
 
         try {
             const response = await axios.post('http://localhost:4000/managementLogin', {
@@ -20,7 +21,8 @@ const ManagementLogin = () => {
             console.log(response.data);
 
             if (response.data === 'you are ready to login') {
-                navigate('/managementDashboard');
+                setuser("management")
+                navigate(`/m/${username}/Dashboard`);
             } else {
                 alert("User doesn't exist or incorrect credentials");
             }

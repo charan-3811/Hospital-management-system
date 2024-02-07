@@ -2,11 +2,12 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import './patientsignup.css';
-function PatientSignup() {
+function PatientSignup(props) {
     const [name, setName] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
+    const {user,setuser}=props
 
     async function handleSignup() {
         try {
@@ -52,32 +53,41 @@ function PatientSignup() {
     }
 
     return (
-        <div className={"signupBox"}>
-            <h2>PATIENT SIGNUP</h2>
-            <div className={"signform-container"}>
-            <form className={"signup"}>
-                <label>
-                    Name:<br />
-                    <input type={"text"} value={name} placeholder={"Enter your name"} onChange={(e) => handleName(e.target.value)} />
-                </label>
-                <br />
-                <label>
-                    Username:<br />
-                    <input type="text" placeholder={"Enter username"} value={username} onChange={(e) => handleUsername(e.target.value)} />
-                </label>
-                <br />
-                <label>
-                    Password:<br />
-                    <input type="password" placeholder={"Enter password"} value={password} onChange={(e) => handlePassword(e.target.value)} />
-                </label>
-                <br />
-                <button type="button" onClick={handleSignup}>
-                    SIGNUP
-                </button>
-                <br />
-                Already have an account? <Link to={"/patientLogin"}>LOGIN</Link>
-            </form>
+        <div>
+        {user === "None" ?
+            <div className={"signupBox"}>
+                <h2>PATIENT SIGNUP</h2>
+                <div className={"signform-container"}>
+                    <form className={"signup"}>
+                        <label>
+                            Name:<br/>
+                            <input type={"text"} value={name} placeholder={"Enter your name"}
+                                   onChange={(e) => handleName(e.target.value)}/>
+                        </label>
+                        <br/>
+                        <label>
+                            Username:<br/>
+                            <input type="text" placeholder={"Enter username"} value={username}
+                                   onChange={(e) => handleUsername(e.target.value)}/>
+                        </label>
+                        <br/>
+                        <label>
+                            Password:<br/>
+                            <input type="password" placeholder={"Enter password"} value={password}
+                                   onChange={(e) => handlePassword(e.target.value)}/>
+                        </label>
+                        <br/>
+                        <button type="button" onClick={handleSignup}>
+                            SIGNUP
+                        </button>
+                        <br/>
+                        Already have an account? <Link to={"/patientLogin"}>LOGIN</Link>
+                    </form>
+                </div>
             </div>
+            :
+            <p>you have already logged in</p>
+        }
         </div>
     );
 }
