@@ -9,6 +9,7 @@ function PatientSignup(props) {
     const navigate = useNavigate();
     const {user,setuser}=props
 
+
     async function handleSignup() {
         try {
             const response = await axios.post("http://localhost:4000/patientSignup", {
